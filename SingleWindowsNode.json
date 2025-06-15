@@ -7,22 +7,6 @@
       "type": "datasource",
       "pluginId": "prometheus",
       "pluginName": "Prometheus"
-    },
-    {
-      "name": "DS_PROMETHEUS-FOR-LIBRARY-PANEL",
-      "label": "prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus",
-      "usage": {
-        "libraryPanels": [
-          {
-            "name": "Pagefile usage",
-            "uid": "bd95ce81-5c5f-4150-943b-7ea8ce46323b"
-          }
-        ]
-      }
     }
   ],
   "__elements": {
@@ -33,7 +17,7 @@
       "model": {
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS-FOR-LIBRARY-PANEL}"
+          "uid": "${DS_PROMETHEUS}"
         },
         "description": "",
         "fieldConfig": {
@@ -59,15 +43,15 @@
               "mode": "percentage",
               "steps": [
                 {
-                  "color": "#299c46",
+                  "color": "green",
                   "value": null
                 },
                 {
-                  "color": "rgba(237, 129, 40, 0.89)",
+                  "color": "orange",
                   "value": 70
                 },
                 {
-                  "color": "#d44a3a",
+                  "color": "dark-red",
                   "value": 90
                 }
               ]
@@ -75,10 +59,6 @@
             "unit": "decbytes"
           },
           "overrides": []
-        },
-        "libraryPanel": {
-          "name": "Pagefile usage",
-          "uid": "bd95ce81-5c5f-4150-943b-7ea8ce46323b"
         },
         "links": [],
         "maxDataPoints": 100,
@@ -589,15 +569,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
+                "color": "orange",
                 "value": 80
               },
               {
-                "color": "#d44a3a",
+                "color": "dark-red",
                 "value": 90
               }
             ]
@@ -677,15 +657,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
+                "color": "orange",
                 "value": 700000000
               },
               {
-                "color": "#d44a3a",
+                "color": "dark-red",
                 "value": 900000000
               }
             ]
@@ -774,15 +754,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
+                "color": "orange",
                 "value": 80
               },
               {
-                "color": "#d44a3a",
+                "color": "dark-red",
                 "value": 90
               }
             ]
@@ -860,15 +840,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
+                "color": "orange",
                 "value": 80
               },
               {
-                "color": "#d44a3a",
+                "color": "dark-red",
                 "value": 90
               }
             ]
@@ -993,19 +973,19 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "dark-red",
                 "value": null
               },
               {
-                "color": "#d44a3a",
+                "color": "dark-red",
                 "value": 0
               },
               {
-                "color": "dark-yellow",
+                "color": "orange",
                 "value": 15
               },
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": 25
               }
             ]
@@ -1280,7 +1260,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": null
               },
               {
@@ -1316,7 +1296,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#299c46",
+                  "fixedColor": "green",
                   "mode": "fixed"
                 }
               }
@@ -1527,7 +1507,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "fixed"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
@@ -1578,38 +1558,7 @@
           },
           "unit": "bytes"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "RX"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "TX"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#299c46",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -1837,7 +1786,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "mappings": [],
           "thresholds": {
@@ -2027,7 +1976,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "fixed"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
@@ -2069,47 +2018,12 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
           "unit": "Bps"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Lenovo USB Ethernet (TX)"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#299c46",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Lenovo USB Ethernet (RX)"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -2257,12 +2171,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": null
               },
               {
                 "color": "dark-red",
-                "value": 80
+                "value": 50
               }
             ]
           },
@@ -2380,7 +2294,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": null
               },
               {
@@ -2489,7 +2403,7 @@
                 "value": null
               },
               {
-                "color": "dark-red",
+                "color": "semi-dark-red",
                 "value": 0
               },
               {
@@ -2497,7 +2411,7 @@
                 "value": 25
               },
               {
-                "color": "#299c46",
+                "color": "green",
                 "value": 35
               }
             ]
@@ -2608,7 +2522,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic",
+            "mode": "thresholds",
             "seriesBy": "min"
           },
           "custom": {
@@ -2649,45 +2563,18 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "yellow",
                 "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
               }
             ]
           },
           "unit": "bytes"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Write C:"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#299c46",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Read C:"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -2794,7 +2681,7 @@
         "defaults": {
           "color": {
             "fixedColor": "#299c46",
-            "mode": "fixed"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
@@ -2898,7 +2785,7 @@
         "defaults": {
           "color": {
             "fixedColor": "#299c46",
-            "mode": "fixed"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
@@ -4247,6 +4134,6 @@
   "timezone": "browser",
   "title": "Single Windows Node",
   "uid": "IV0hu1m7z",
-  "version": 28,
+  "version": 29,
   "weekStart": ""
 }
