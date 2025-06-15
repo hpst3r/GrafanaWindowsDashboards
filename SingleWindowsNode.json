@@ -424,6 +424,12 @@
     },
     {
       "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
       "id": "timeseries",
       "name": "Time series",
       "version": ""
@@ -454,94 +460,6 @@
   "links": [],
   "liveNow": false,
   "panels": [
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 0
-      },
-      "id": 33,
-      "interval": "",
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.6",
-      "repeat": "host",
-      "repeatDirection": "v",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "windows_time_current_timestamp_seconds{instance=~\"$server\"} - ignoring(process, process_id) windows_process_start_time_seconds_timestamp{process_id=\"0\",instance=~\"$server\"}",
-          "format": "time_series",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "__auto",
-          "refId": "A"
-        }
-      ],
-      "title": "Uptime",
-      "type": "stat"
-    },
     {
       "datasource": {
         "type": "prometheus",
@@ -589,7 +507,7 @@
       "gridPos": {
         "h": 6,
         "w": 3,
-        "x": 3,
+        "x": 0,
         "y": 0
       },
       "id": 19,
@@ -677,7 +595,7 @@
       "gridPos": {
         "h": 6,
         "w": 3,
-        "x": 6,
+        "x": 3,
         "y": 0
       },
       "id": 17,
@@ -774,7 +692,7 @@
       "gridPos": {
         "h": 6,
         "w": 3,
-        "x": 9,
+        "x": 6,
         "y": 0
       },
       "id": 21,
@@ -812,6 +730,19 @@
       ],
       "title": "Memory used (%)",
       "type": "gauge"
+    },
+    {
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 9,
+        "y": 0
+      },
+      "id": 51,
+      "libraryPanel": {
+        "uid": "bd95ce81-5c5f-4150-943b-7ea8ce46323b",
+        "name": "Pagefile usage"
+      }
     },
     {
       "datasource": {
@@ -900,19 +831,6 @@
       "type": "gauge"
     },
     {
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 15,
-        "y": 0
-      },
-      "id": 51,
-      "libraryPanel": {
-        "uid": "bd95ce81-5c5f-4150-943b-7ea8ce46323b",
-        "name": "Pagefile usage"
-      }
-    },
-    {
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -931,8 +849,8 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -945,7 +863,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -996,8 +914,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 6,
-        "x": 18,
+        "w": 9,
+        "x": 15,
         "y": 0
       },
       "id": 40,
@@ -1006,10 +924,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "min"
           ],
           "displayMode": "table",
-          "placement": "bottom",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -1074,15 +993,494 @@
               }
             ]
           },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 0,
+        "y": 6
+      },
+      "id": 33,
+      "interval": "",
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "repeat": "host",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "((windows_time_current_timestamp_seconds{instance=~\"$server\"}) - ignoring(process, process_id) (windows_process_start_time_seconds_timestamp{process_id=\"0\",instance=~\"$server\"}))",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 2,
+        "y": 6
+      },
+      "id": 37,
+      "interval": "",
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "repeat": "host",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "windows_memory_physical_total_bytes{instance=~\"$server\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Physical memory",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "null": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 4,
+        "y": 6
+      },
+      "id": 45,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "topk(1, windows_cpu_info{instance=~\"$server\"})",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{name}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU model",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "null": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 10,
+        "y": 6
+      },
+      "id": 44,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "scalar(count(windows_cpu_info{instance=\"$server\"}))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Sockets",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "null": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 12,
+        "y": 6
+      },
+      "id": 46,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "scalar(avg(windows_cpu_info_core{instance=\"$server\"}))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cores per socket",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "null": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 14,
+        "y": 6
+      },
+      "id": 47,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "scalar(avg(windows_cpu_info_thread{instance=\"$server\"} / windows_cpu_info_core{instance=\"$server\"}))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Threads per core",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
           "unit": "none"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 2
+        "h": 3,
+        "w": 2,
+        "x": 16,
+        "y": 6
       },
       "id": 35,
       "interval": "",
@@ -1131,86 +1529,25 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
       "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 0,
-        "y": 4
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 6
       },
-      "id": 37,
-      "interval": "",
-      "links": [],
-      "maxDataPoints": 100,
+      "id": 59,
       "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "textMode": "auto",
-        "wideLayout": true
+        "content": "\"${fqdn}\" running ${os_sku}, build ${build_major}.${build_revision}",
+        "mode": "markdown"
       },
       "pluginVersion": "10.2.6",
-      "repeat": "host",
-      "repeatDirection": "v",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "windows_memory_physical_total_bytes{instance=~\"$server\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Physical memory",
-      "type": "stat"
+      "title": "OS info",
+      "type": "text"
     },
     {
       "datasource": {
@@ -1231,7 +1568,7 @@
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
-            "gradientMode": "none",
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1308,7 +1645,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 6
+        "y": 9
       },
       "hideTimeOverride": false,
       "id": 4,
@@ -1373,7 +1710,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 6
+        "y": 9
       },
       "id": 49,
       "libraryPanel": {
@@ -1400,7 +1737,7 @@
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
-            "gradientMode": "none",
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1462,7 +1799,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 15
+        "y": 18
       },
       "id": 25,
       "links": [],
@@ -1564,7 +1901,7 @@
         "h": 9,
         "w": 6,
         "x": 12,
-        "y": 15
+        "y": 18
       },
       "hideTimeOverride": false,
       "id": 29,
@@ -1684,7 +2021,7 @@
         "h": 9,
         "w": 6,
         "x": 18,
-        "y": 15
+        "y": 18
       },
       "hideTimeOverride": false,
       "id": 10,
@@ -1730,7 +2067,7 @@
           "item": {
             "filter": ""
           },
-          "legendFormat": "{{nic}} TX",
+          "legendFormat": "{{nic}} (TX)",
           "metric": "mysql_global_status_questions",
           "mode": 0,
           "options": {
@@ -1764,7 +2101,7 @@
           "item": {
             "filter": ""
           },
-          "legendFormat": "{{nic}} RX",
+          "legendFormat": "{{nic}} (RX)",
           "metric": "mysql_global_status_questions",
           "mode": 0,
           "options": {
@@ -1806,7 +2143,7 @@
         "h": 9,
         "w": 4,
         "x": 0,
-        "y": 24
+        "y": 27
       },
       "id": 57,
       "options": {
@@ -1894,7 +2231,7 @@
         "h": 9,
         "w": 8,
         "x": 4,
-        "y": 24
+        "y": 27
       },
       "id": 58,
       "options": {
@@ -1907,7 +2244,7 @@
           ],
           "show": false
         },
-        "frameIndex": 0,
+        "frameIndex": 2,
         "showHeader": true,
         "sortBy": []
       },
@@ -2029,7 +2366,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 27
       },
       "hideTimeOverride": false,
       "id": 11,
@@ -2142,7 +2479,7 @@
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
-            "gradientMode": "none",
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -2188,7 +2525,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 33
+        "y": 36
       },
       "hideTimeOverride": false,
       "id": 9,
@@ -2310,7 +2647,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 33
+        "y": 36
       },
       "id": 56,
       "options": {
@@ -2344,7 +2681,7 @@
           "refId": "A"
         }
       ],
-      "title": "Disk queue",
+      "title": "Disk queues",
       "type": "timeseries"
     },
     {
@@ -2382,7 +2719,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2439,7 +2776,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 42
+        "y": 45
       },
       "hideTimeOverride": false,
       "id": 15,
@@ -2533,7 +2870,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -2580,7 +2917,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 42
+        "y": 45
       },
       "hideTimeOverride": false,
       "id": 8,
@@ -2734,7 +3071,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 51
+        "y": 54
       },
       "id": 27,
       "links": [],
@@ -2838,7 +3175,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 51
+        "y": 54
       },
       "hideTimeOverride": false,
       "id": 12,
@@ -2967,7 +3304,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 60
+        "y": 63
       },
       "id": 53,
       "options": {
@@ -3066,7 +3403,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 60
+        "y": 63
       },
       "id": 55,
       "options": {
@@ -3166,7 +3503,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 69
+        "y": 72
       },
       "id": 52,
       "options": {
@@ -3200,7 +3537,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total I/O operations per process (60s)",
+      "title": "I/O operations per process (60s)",
       "type": "timeseries"
     },
     {
@@ -3267,7 +3604,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 69
+        "y": 72
       },
       "id": 54,
       "options": {
@@ -3367,7 +3704,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 78
+        "y": 81
       },
       "id": 42,
       "options": {
@@ -3494,7 +3831,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 78
+        "y": 81
       },
       "id": 7,
       "links": [],
@@ -3581,7 +3918,7 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 87
+        "y": 90
       },
       "id": 43,
       "options": {
@@ -3619,311 +3956,6 @@
       ],
       "title": "Volume capacity",
       "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "fieldMinMax": false,
-          "mappings": [
-            {
-              "options": {
-                "null": {
-                  "index": 0,
-                  "text": "N/A"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 6,
-        "y": 87
-      },
-      "id": 44,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.6",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "scalar(count(windows_cpu_info{instance=\"$server\"}))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Sockets",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "fieldMinMax": false,
-          "mappings": [
-            {
-              "options": {
-                "null": {
-                  "index": 0,
-                  "text": "N/A"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 8,
-        "y": 87
-      },
-      "id": 46,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.6",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "scalar(avg(windows_cpu_info_core{instance=\"$server\"}))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Cores per socket",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "fieldMinMax": false,
-          "mappings": [
-            {
-              "options": {
-                "null": {
-                  "index": 0,
-                  "text": "N/A"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 10,
-        "y": 87
-      },
-      "id": 47,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.6",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "scalar(avg(windows_cpu_info_thread{instance=\"$server\"} / windows_cpu_info_core{instance=\"$server\"}))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Threads per core",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "fieldMinMax": false,
-          "mappings": [
-            {
-              "options": {
-                "null": {
-                  "index": 0,
-                  "text": "N/A"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 6,
-        "y": 91
-      },
-      "id": 45,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.6",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "topk(1, windows_cpu_info{instance=~\"$server\"})",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "{{name}}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU model",
-      "type": "stat"
     }
   ],
   "refresh": "10s",
@@ -3988,7 +4020,7 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "query_result(scalar(count(windows_cpu_info{instance=\"$server\"})))",
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "Sockets",
         "multi": false,
@@ -4036,7 +4068,7 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "query_result(scalar(avg(windows_cpu_info_thread{instance=\"$server\"} / windows_cpu_info_core{instance=\"$server\"})))",
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "Threads per core",
         "multi": false,
@@ -4060,7 +4092,7 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "query_result(scalar(avg(windows_cpu_info_core{instance=\"$server\"})))",
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "Cores per socket",
         "multi": false,
@@ -4100,6 +4132,102 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(windows_os_info{instance=\"$server\"},product)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "OS",
+        "multi": false,
+        "name": "os_sku",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(windows_os_info{instance=\"$server\"},product)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(windows_os_info{instance=\"$server\"},build_number)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Build",
+        "multi": false,
+        "name": "build_major",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(windows_os_info{instance=\"$server\"},build_number)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(windows_os_info{instance=\"$server\"},revision)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Rev",
+        "multi": false,
+        "name": "build_revision",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(windows_os_info{instance=\"$server\"},revision)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(windows_os_hostname{instance=\"$server\"},fqdn)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Host FQDN",
+        "multi": false,
+        "name": "fqdn",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(windows_os_hostname{instance=\"$server\"},fqdn)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -4134,6 +4262,6 @@
   "timezone": "browser",
   "title": "Single Windows Node",
   "uid": "IV0hu1m7z",
-  "version": 29,
+  "version": 37,
   "weekStart": ""
 }
