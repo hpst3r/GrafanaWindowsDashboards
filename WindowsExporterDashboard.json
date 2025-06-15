@@ -1306,6 +1306,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "idle"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#299c46",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1345,7 +1360,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (mode) (rate(windows_cpu_time_total{instance=~\"$server\", mode!~\"idle\"}[60s]))",
+          "expr": "sum by (mode) (rate(windows_cpu_time_total{instance=~\"$server\"}[60s]))",
           "format": "time_series",
           "functions": [],
           "group": {
@@ -2978,7 +2993,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "100 * sum by(instance, process, process_id) (rate(windows_process_cpu_time_total{instance=\"$server\", process!=\"Idle\"}[60s]))\r\n / on(instance) group_left sum by(instance) (rate(windows_cpu_time_total{instance=\"$server\"}[60s]))",
+          "expr": "100 * sum by(instance, process, process_id) (rate(windows_process_cpu_time_total{instance=\"$server\", process!=\"Idle\"}[60s]))\r\n / on(instance) group_left sum by(instance) (rate(windows_cpu_time_total{instance=\"$server\"}[60s])) > .00001",
           "instant": false,
           "legendFormat": "{{process}}",
           "range": true,
@@ -3078,7 +3093,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(windows_process_page_faults_total{instance=\"$server\"}[60s])",
+          "expr": "rate(windows_process_page_faults_total{instance=\"$server\"}[60s]) > 10",
           "instant": false,
           "legendFormat": "{{process}}",
           "range": true,
@@ -3178,7 +3193,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(windows_process_io_operations_total{instance=\"$server\"}[60s])",
+          "expr": "rate(windows_process_io_operations_total{instance=\"$server\"}[60s]) > 5",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{process}}",
@@ -3278,7 +3293,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "windows_process_working_set_bytes{instance=\"$server\"}",
+          "expr": "windows_process_working_set_bytes{instance=\"$server\"} > 1024*1024",
           "instant": false,
           "legendFormat": "{{process}}",
           "range": true,
@@ -4117,6 +4132,6 @@
   "timezone": "browser",
   "title": "Windows Exporter Dashboard",
   "uid": "IV0hu1m7z",
-  "version": 24,
+  "version": 26,
   "weekStart": ""
 }
